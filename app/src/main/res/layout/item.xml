@@ -6,9 +6,12 @@
 
     <TextView
         android:id="@+id/txtWord"
-        android:layout_width="371dp"
-        android:layout_height="30dp"
-        android:gravity="center"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:scrollHorizontally="false"
+        android:layout_marginLeft="10dp"
+        android:layout_marginVertical="5dp"
+        android:gravity="left"
         android:text="TextView"
 
         android:textSize="18sp" />
