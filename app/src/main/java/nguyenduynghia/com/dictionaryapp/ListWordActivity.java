@@ -1,17 +1,23 @@
 package nguyenduynghia.com.dictionaryapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -21,6 +27,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class ListWordActivity extends AppCompatActivity {
 
@@ -33,6 +42,7 @@ public class ListWordActivity extends AppCompatActivity {
 
     ListView lvWord;
     Toolbar tool_bar_list;
+    SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,7 @@ public class ListWordActivity extends AppCompatActivity {
         addControls();
         loadAllWords();
         addEvents();
+
     }
 
     private void loadAllWords() {
@@ -51,7 +62,6 @@ public class ListWordActivity extends AppCompatActivity {
         while (cursor.moveToNext()){
             String word=cursor.getString(1);
             String mean=cursor.getString(2);
-
             Word w=new Word(word,mean);
             wordAdapter.add(w);
         }
@@ -84,8 +94,8 @@ public class ListWordActivity extends AppCompatActivity {
 
     private void lookUps() {
         //MenuItem mnuSearch1=findViewById(R.id.mnuSearch1);
-        SearchView searchView= findViewById(R.id.mnuSearch1);
 
+        searchView= findViewById(R.id.mnuSearch1);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -111,12 +121,41 @@ public class ListWordActivity extends AppCompatActivity {
             }
         });
     }
+    public void searchByVoice(MenuItem item) {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please talk!");
+
+        try {
+            startActivityForResult(intent, 113);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(), "Not supported", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 113 && resultCode == RESULT_OK && data != null)
+        {
+            //phan tu dau tien la dung nhat.
+            ArrayList<String> result = data
+                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            //txtSpeechInput.setText(result.get(0));
+            searchView.onActionViewExpanded();
+            searchView.setQuery(result.get(0), false);
+
+        }
+    }
 
     private void addControls() {
         tool_bar_list=findViewById(R.id.tool_bar_list);
         lvWord=findViewById(R.id.lvWord);
         wordAdapter=new WordAdapter(ListWordActivity.this,R.layout.item);
         lvWord.setAdapter(wordAdapter);
+
     }
 
     private void processCopy() {
@@ -176,10 +215,10 @@ public class ListWordActivity extends AppCompatActivity {
             String mean=cursor.getString(2);
             Word w=new Word(word,mean);
             wordAdapter.add(w);
-
         }
         cursor.close();
 
     }
+
 
 }
