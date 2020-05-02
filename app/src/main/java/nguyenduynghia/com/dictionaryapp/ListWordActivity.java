@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -60,9 +62,10 @@ public class ListWordActivity extends AppCompatActivity {
 
         wordAdapter.clear();
         while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
             String word=cursor.getString(1);
             String mean=cursor.getString(2);
-            Word w=new Word(word,mean);
+            Word w=new Word(id, word,mean);
             wordAdapter.add(w);
         }
         cursor.close();
@@ -75,6 +78,14 @@ public class ListWordActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(ListWordActivity.this,SelectedItemActivity.class);
+
+//                Lưu object word vào bundle cho activity
+//              hiển thị nghĩa của từ (SelectedItemActivity)
+//                Không dùng lvWord.getSelectedItem -> null
+                Word tuCanTra = (Word) lvWord.getItemAtPosition(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("WORD", (Serializable) tuCanTra);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -94,8 +105,9 @@ public class ListWordActivity extends AppCompatActivity {
 
     private void lookUps() {
         //MenuItem mnuSearch1=findViewById(R.id.mnuSearch1);
-
         searchView= findViewById(R.id.mnuSearch1);
+        searchView.setIconified(false);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -110,10 +122,11 @@ public class ListWordActivity extends AppCompatActivity {
                 wordAdapter.clear();
 
                 while (cursor.moveToNext()){
+                    int id = cursor.getInt(0);
                     String word=cursor.getString(1);
                     String mean=cursor.getString(2);
 
-                    Word w=new Word(word,mean);
+                    Word w=new Word(id, word,mean);
                     wordAdapter.add(w);
                 }
                 cursor.close();
@@ -211,9 +224,10 @@ public class ListWordActivity extends AppCompatActivity {
         wordAdapter.clear();
 
         while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
             String word=cursor.getString(1);
             String mean=cursor.getString(2);
-            Word w=new Word(word,mean);
+            Word w=new Word(id, word, mean);
             wordAdapter.add(w);
         }
         cursor.close();

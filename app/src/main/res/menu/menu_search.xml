@@ -7,12 +7,13 @@
         android:title="Voice Search"
         android:icon="@drawable/sharp_keyboard_voice_24"
         android:onClick="searchByVoice"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/mnuSearch1"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
+
         app:showAsAction="always" />
     <item android:title="Item" />
     <item android:title="Item" />

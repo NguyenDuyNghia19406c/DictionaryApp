@@ -8,6 +8,7 @@
     tools:context=".SelectedItemActivity">
 
     <TabHost
+        android:id="@+id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -40,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
+                    <include layout="@layout/word_definition"/>
                 </LinearLayout>
 
                 <LinearLayout
