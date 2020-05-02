@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mnuVoiceSearch"
+        android:title="Voice Search"
+        android:icon="@drawable/sharp_keyboard_voice_24"
+        android:onClick="searchByVoice"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/mnuSearch1"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
