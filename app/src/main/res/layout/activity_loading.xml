@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoadingActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Please wait" />
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+   <TextView
+       android:layout_height="wrap_content"
+       android:layout_width="match_parent"
+       android:text="Loading...."
+       android:textSize="50dp"
+       android:gravity="center"/>
+        <TextView
+            android:id="@+id/txtNameActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name Activity loading"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+</GridLayout>

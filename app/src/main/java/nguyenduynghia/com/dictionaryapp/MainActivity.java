@@ -17,17 +17,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
+
 
 public class MainActivity extends AppCompatActivity {
 
-
+    enum ActivityOpen{
+        ListWordActivity
+    }
+    ActivityMainBinding binding;
     Button btnLookUps;
+    public static ActivityOpen opening;
     //SearchView search_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         //processCopy();
         addControls();
         addEvents();
@@ -45,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         btnLookUps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,ListWordActivity.class);
+                opening=ActivityOpen.ListWordActivity;
+                Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
                 startActivity(intent);
             }
         });
