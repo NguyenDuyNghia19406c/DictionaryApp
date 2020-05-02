@@ -5,11 +5,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class SelectedItemActivity extends AppCompatActivity {
 
@@ -17,6 +22,8 @@ public class SelectedItemActivity extends AppCompatActivity {
     TabHost tabHost;
     Word tuCanTra;
     TextView txtWord, txtMeaning;
+    ImageButton btnBritishSpeaker, btnAmericanSpeaker;
+    TextToSpeech speaker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +35,7 @@ public class SelectedItemActivity extends AppCompatActivity {
         addTabs();
         addControls();
         addEvents();
-
 //        Lấy từ người dùng chọn bên ListWordActivity
-
-
         addMeaning();
     }
 
@@ -48,6 +52,50 @@ public class SelectedItemActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //Speak
+        btnBritishSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                speak("british");
+            }
+        });
+        btnAmericanSpeaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speak("american");
+            }
+        });
+    }
+
+    private void speak(final String voice) {
+        if(speaker != null) speaker.stop();
+        speaker = new TextToSpeech(SelectedItemActivity.this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result;
+                    if(voice.equals("british"))
+                        result = speaker.setLanguage(Locale.UK);
+                    else
+                        result = speaker.setLanguage(Locale.US);
+                    if(result==TextToSpeech.LANG_MISSING_DATA ||
+                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("error", "This language is not supported");
+                    }
+                    else{
+                        ConvertTextToSpeech();
+                    }
+                }
+                else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
+    }
+
+    private void ConvertTextToSpeech() {
+        String text = tuCanTra.getWord();
+        speaker.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     private void addControls() {
@@ -55,6 +103,9 @@ public class SelectedItemActivity extends AppCompatActivity {
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);
+
+        btnBritishSpeaker = findViewById(R.id.btnBritishSpeaker);
+        btnAmericanSpeaker = findViewById(R.id.btnAmericanSpeaker);
     }
 
     private void addTabs() {
