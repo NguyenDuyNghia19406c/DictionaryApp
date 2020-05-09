@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">DictionaryApp</string>
     <string name="LooksUpWords">Looks up words</string>
-    <string name="yourWords">" Your Words"</string>
+    <string name="yourWords">Your Words</string>
 </resources>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Dictionary App</string>
-    <string name="LooksUpWords"> Looks up words</string>
-    <string name="yourWords"> Your Words</string>
-</resources>
