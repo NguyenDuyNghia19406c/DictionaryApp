@@ -21,7 +21,7 @@
         android:id="@+id/btnLookUps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Look ups word" />
+        android:text="@string/LooksUpWords" />
 
     <Button
         android:id="@+id/btnYourWords"
