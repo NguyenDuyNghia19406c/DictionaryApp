@@ -23,11 +23,13 @@ import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     enum ActivityOpen{
-        ListWordActivity
+        ListWordActivity,
+        YourWordsActivity
     }
     ActivityMainBinding binding;
     Button btnLookUps;
     public static ActivityOpen opening;
+    public static WordAdapter wordsLoveAdapter;
     //SearchView search_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addControls() {
         btnLookUps=findViewById(R.id.btnLookUps);
+        wordsLoveAdapter=new WordAdapter(MainActivity.this,R.layout.item);
         //search_view=findViewById(R.id.search_view);
         //wordAdapter=new WordAdapter(MainActivity.this,R.layout.item);
 
@@ -52,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 opening=ActivityOpen.ListWordActivity;
+                Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.btnYourWords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opening=ActivityOpen.YourWordsActivity;
                 Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
                 startActivity(intent);
             }

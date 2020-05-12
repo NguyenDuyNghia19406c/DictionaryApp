@@ -38,8 +38,8 @@ public class ListWordActivity extends AppCompatActivity {
 
     String DATABASE_NAME="TuDienAnhviet.sqlite";
     String DB_PATH_SUFFIX = "/databases/";
-    SQLiteDatabase database=null;
-    String wordTable="data";
+    public static SQLiteDatabase database=null;
+    public static String wordTable="data";
     static WordAdapter wordAdapter;
 
     ListView lvWord;
@@ -65,7 +65,11 @@ public class ListWordActivity extends AppCompatActivity {
             int id = cursor.getInt(0);
             String word=cursor.getString(1);
             String mean=cursor.getString(2);
-            Word w=new Word(id, word,mean);
+            String History=cursor.getString(3);
+            boolean isLove=false;
+            if(History=="Love")
+                isLove=true;
+            Word w=new Word(id, word,mean,isLove);
             wordAdapter.add(w);
         }
         cursor.close();
@@ -125,7 +129,6 @@ public class ListWordActivity extends AppCompatActivity {
                     int id = cursor.getInt(0);
                     String word=cursor.getString(1);
                     String mean=cursor.getString(2);
-
                     Word w=new Word(id, word,mean);
                     wordAdapter.add(w);
                 }
@@ -167,6 +170,7 @@ public class ListWordActivity extends AppCompatActivity {
         tool_bar_list=findViewById(R.id.tool_bar_list);
         lvWord=findViewById(R.id.lvWord);
         wordAdapter=new WordAdapter(ListWordActivity.this,R.layout.item);
+        wordAdapter.clear();
         lvWord.setAdapter(wordAdapter);
 
     }
@@ -234,5 +238,8 @@ public class ListWordActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

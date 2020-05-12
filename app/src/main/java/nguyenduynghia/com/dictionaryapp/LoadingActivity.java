@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityLoadingBinding;
 
@@ -31,6 +30,11 @@ public class LoadingActivity extends AppCompatActivity {
                         case ListWordActivity:
                             intent=new Intent(LoadingActivity.this, ListWordActivity.class);
                             binding.txtNameActivity.setText("Loook ups word");
+                            break;
+                        case YourWordsActivity:
+                            intent=new Intent(LoadingActivity.this, YourWordsActivity.class);
+                            binding.txtNameActivity.setText("Your words");
+                            break;
                     }
                     startActivity(intent);
                     finish();

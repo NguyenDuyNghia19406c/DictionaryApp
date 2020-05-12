@@ -1,16 +1,24 @@
 package nguyenduynghia.com.dictionaryapp;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Collections;
+import java.util.List;
+
+import nguyenduynghia.com.dictionaryapp.databinding.ActivityYourWordsBinding;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
@@ -30,15 +38,57 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         final TextView txtWord=view.findViewById(R.id.txtWord);
         final ImageView imgClose=view.findViewById(R.id.imgClose);
+        final ImageView imgSetLove=view.findViewById(R.id.imgSetLove);
 
         final Word word=getItem(position);
         txtWord.setText(word.getWord());
+        if(word.isLove())
+            imgSetLove.setImageResource(R.drawable.ic_unlove);
+        else
+            imgSetLove.setImageResource(R.drawable.ic_love);
 
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(word);
             }
+        });
+
+        imgSetLove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(word.isLove()) //Đang Love click vô sẽ thành Unlove
+                    xuLyUnlove();
+                else
+                    xuLyLove();
+            }
+
+            private void xuLyLove() {
+                word.setLove(true);
+                YourWordsActivity.wordsLove.add(word);
+                imgSetLove.setImageResource(R.drawable.ic_unlove);
+                updateLoveOrUnloveToDatabase(word);
+            }
+
+            private void xuLyUnlove() {
+                word.setLove(false);
+                YourWordsActivity.wordsLove.remove(word);
+                if(MainActivity.opening.equals(MainActivity.ActivityOpen.YourWordsActivity))
+                    remove(word);
+                imgSetLove.setImageResource(R.drawable.ic_love);
+                updateLoveOrUnloveToDatabase(word);
+            }
+
+            private void updateLoveOrUnloveToDatabase(Word word) {
+                ContentValues values = new ContentValues();
+                if(word.isLove())
+                    values.put("History", "Love");
+                else
+                    values.put("History", "Unlove");
+                ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+
+            }
+
         });
 
         return view;
