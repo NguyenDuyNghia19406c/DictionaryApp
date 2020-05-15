@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import iamthaoly.com.models.Setting;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
 
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ListWordActivity
     }
     ActivityMainBinding binding;
-    Button btnLookUps;
+    Button btnLookUps, btnSettings;
     public static ActivityOpen opening;
     //SearchView search_view;
     @Override
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnLookUps=findViewById(R.id.btnLookUps);
         //search_view=findViewById(R.id.search_view);
         //wordAdapter=new WordAdapter(MainActivity.this,R.layout.item);
-
+        btnSettings = findViewById(R.id.btnSettings);
     }
 
     private void addEvents() {
@@ -56,7 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

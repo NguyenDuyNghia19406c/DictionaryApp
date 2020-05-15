@@ -3,5 +3,8 @@
     <string name="app_name">Từ điển tiếng Anh </string>
     <string name="LooksUpWords">Tra từ</string>
     <string name="yourWords">Từ của bạn</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
 
 </resources>
