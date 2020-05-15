@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -41,6 +42,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void addMeaning() {
         txtWord.setText(tuCanTra.getWord());
+
         txtMeaning.setText(tuCanTra.getMean());
     }
 
@@ -103,6 +105,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);
+        txtMeaning.setMovementMethod(new ScrollingMovementMethod());
 
         btnBritishSpeaker = findViewById(R.id.btnBritishSpeaker);
         btnAmericanSpeaker = findViewById(R.id.btnAmericanSpeaker);
