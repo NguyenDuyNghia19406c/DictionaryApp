@@ -97,6 +97,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void ConvertTextToSpeech() {
         String text = tuCanTra.getWord();
+        speaker.setSpeechRate(0.8f);
         speaker.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
