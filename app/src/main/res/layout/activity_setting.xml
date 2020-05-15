@@ -38,13 +38,15 @@
                 android:id="@+id/radEnglish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/english" />
+                android:text="@string/english"
+                android:onClick="changeLanguage"/>
 
             <RadioButton
                 android:id="@+id/radVietnamese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/vietnamese" />
+                android:text="@string/vietnamese"
+                android:onClick="changeLanguage"/>
         </RadioGroup>
 
     </LinearLayout>
