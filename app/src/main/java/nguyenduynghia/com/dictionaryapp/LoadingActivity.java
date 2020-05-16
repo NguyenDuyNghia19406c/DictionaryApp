@@ -31,6 +31,11 @@ public class LoadingActivity extends AppCompatActivity {
                         case ListWordActivity:
                             intent=new Intent(LoadingActivity.this, ListWordActivity.class);
                             binding.txtNameActivity.setText(getString(R.string.loading2));
+                            break;
+                        case YourWordsActivity:
+                            intent=new Intent(LoadingActivity.this, YourWordsActivity.class);
+                            binding.txtNameActivity.setText(getString(R.string.loading2));
+                            break;
                     }
                     startActivity(intent);
                     finish();
