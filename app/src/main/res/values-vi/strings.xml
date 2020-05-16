@@ -6,5 +6,9 @@
     <string name="language">Ngôn ngữ</string>
     <string name="english">Tiếng Anh</string>
     <string name="vietnamese">Tiếng Việt</string>
+    <string name="recentWords">Từ đã tìm kiếm</string>
+    <string name="settings">Cài đặt</string>
+    <string name="definition">Định nghĩa</string>
+    <string name="images">Hình ảnh</string>
 
 </resources>

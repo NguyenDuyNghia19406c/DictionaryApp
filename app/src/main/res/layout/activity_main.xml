@@ -27,7 +27,7 @@
         android:id="@+id/btnYourWords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your words"
+        android:text="@string/yourWords"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="101dp" />
 
@@ -35,7 +35,7 @@
         android:id="@+id/btnRecent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recent Words"
+        android:text="@string/recentWords"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="156dp" />
 
@@ -43,7 +43,7 @@
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="204dp" />
 
