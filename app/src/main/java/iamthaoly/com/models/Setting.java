@@ -3,9 +3,12 @@ package iamthaoly.com.models;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.yariksoffice.lingver.Lingver;
 import com.yariksoffice.lingver.store.PreferenceLocaleStore;
@@ -62,8 +65,16 @@ public class Setting extends BaseActivity {
         restart();
     }
     private void restart() {
-        Intent i = new Intent(Setting.this, MainActivity.class);
-        startActivity(i);
-        Toast.makeText(this, "Activity restarted", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Setting.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        startActivity(intent);
+
+//        Toast.makeText(this, "Activity restarted", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
