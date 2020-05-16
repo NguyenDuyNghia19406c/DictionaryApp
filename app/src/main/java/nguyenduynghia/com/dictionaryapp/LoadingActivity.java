@@ -22,7 +22,7 @@ public class LoadingActivity extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(1000);  //Delay of 1 seconds
+                    sleep(500);  //Delay of 1 seconds
                 } catch (Exception e) {
 
                 } finally {
@@ -30,7 +30,7 @@ public class LoadingActivity extends AppCompatActivity {
                     switch (MainActivity.opening){
                         case ListWordActivity:
                             intent=new Intent(LoadingActivity.this, ListWordActivity.class);
-                            binding.txtNameActivity.setText("Loook ups word");
+                            binding.txtNameActivity.setText(getString(R.string.loading2));
                     }
                     startActivity(intent);
                     finish();
