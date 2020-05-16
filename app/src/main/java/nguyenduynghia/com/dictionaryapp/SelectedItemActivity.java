@@ -120,10 +120,10 @@ public class SelectedItemActivity extends AppCompatActivity {
         tab1.setIndicator(getResources().getString(R.string.definition));
         tab1.setContent(R.id.tab1);
         tabHost.addTab(tab1);
-        TabHost.TabSpec tab2 = tabHost.newTabSpec("t2");
-        tab2.setIndicator("Từ đồng nghĩa");
-        tab2.setContent(R.id.tab2);
-        tabHost.addTab(tab2);
+//        TabHost.TabSpec tab2 = tabHost.newTabSpec("t2");
+//        tab2.setIndicator("Từ đồng nghĩa");
+//        tab2.setContent(R.id.tab2);
+//        tabHost.addTab(tab2);
         TabHost.TabSpec tab3 = tabHost.newTabSpec("t3");
         tab3.setIndicator(getResources().getString(R.string.images));
         tab3.setContent(R.id.tab3);

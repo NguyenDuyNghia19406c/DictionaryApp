@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="British"
+                android:text="@string/ukVoice"
                 android:textSize="18sp" />
 
             <ImageButton
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="American"
+                android:text="@string/usVoice"
                 android:textSize="18sp" />
 
             <ImageButton
