@@ -67,6 +67,8 @@ public class SelectedItemActivity extends AppCompatActivity {
                 speak("american");
             }
         });
+
+        tool_bar_selecteditem.setTitle(tuCanTra.getWord());
     }
 
     private void speak(final String voice) {
