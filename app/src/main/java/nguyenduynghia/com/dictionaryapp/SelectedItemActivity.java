@@ -106,7 +106,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);
-        txtMeaning.setMovementMethod(new ScrollingMovementMethod());
+//        txtMeaning.setMovementMethod(new ScrollingMovementMethod());
 
         btnBritishSpeaker = findViewById(R.id.btnBritishSpeaker);
         btnAmericanSpeaker = findViewById(R.id.btnAmericanSpeaker);
