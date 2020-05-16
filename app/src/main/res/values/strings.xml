@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Ga Dictionary</string>
+    <string name="app_name" translatable="false">Gà Dictionary</string>
     <string name="LooksUpWords">Looks up words</string>
     <string name="yourWords">Your Words</string>
     <string name="language">Language</string>
