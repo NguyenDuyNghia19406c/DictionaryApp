@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Từ điển tiếng Anh </string>
     <string name="LooksUpWords">Tra từ</string>
     <string name="yourWords">Từ của bạn</string>
+    <string name="language"><u>Ngôn ngữ</u></string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="recentWords">Từ đã tìm kiếm</string>
+    <string name="settings">Cài đặt</string>
+    <string name="definition">Định nghĩa</string>
+    <string name="images">Hình ảnh</string>
+    <string name="loading">Đang tải...</string>
+    <string name="loading2">Sắp xong rùi cả nhàà</string>
 
 </resources>

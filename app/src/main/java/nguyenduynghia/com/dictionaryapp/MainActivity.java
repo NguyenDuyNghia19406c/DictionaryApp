@@ -1,35 +1,22 @@
 package nguyenduynghia.com.dictionaryapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import androidx.appcompat.app.AppCompatActivity;
+import iamthaoly.com.models.Setting;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
     enum ActivityOpen{
-        ListWordActivity,
-        YourWordsActivity
+        ListWordActivity
     }
     ActivityMainBinding binding;
-    Button btnLookUps;
+    Button btnLookUps, btnSettings;
     public static ActivityOpen opening;
-    public static WordAdapter wordsLoveAdapter;
     //SearchView search_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +29,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private void addControls() {
         btnLookUps=findViewById(R.id.btnLookUps);
-        wordsLoveAdapter=new WordAdapter(MainActivity.this,R.layout.item);
         //search_view=findViewById(R.id.search_view);
         //wordAdapter=new WordAdapter(MainActivity.this,R.layout.item);
-
+        btnSettings = findViewById(R.id.btnSettings);
     }
 
     private void addEvents() {
-
-
         btnLookUps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,22 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        binding.btnYourWords.setOnClickListener(new View.OnClickListener() {
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opening=ActivityOpen.YourWordsActivity;
-                Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
+                Intent intent = new Intent(MainActivity.this, Setting.class);
                 startActivity(intent);
             }
         });
-
     }
-
-
-
-
-
-
-
 
 }
