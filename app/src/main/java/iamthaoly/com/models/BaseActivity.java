@@ -1,6 +1,8 @@
 package iamthaoly.com.models;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -8,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import nguyenduynghia.com.dictionaryapp.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
@@ -19,6 +23,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             Toast.makeText(this, "ActionBar is nulled!", Toast.LENGTH_SHORT).show();
         }
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent)));
+        actionBar.setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"));
+
     }
 
     @Override

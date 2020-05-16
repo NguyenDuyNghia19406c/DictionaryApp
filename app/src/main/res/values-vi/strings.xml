@@ -2,7 +2,7 @@
 <resources>
     <string name="LooksUpWords">Tra từ</string>
     <string name="yourWords">Từ của bạn</string>
-    <string name="language">Ngôn ngữ</string>
+    <string name="language"><u>Ngôn ngữ</u></string>
     <string name="english">Tiếng Anh</string>
     <string name="vietnamese">Tiếng Việt</string>
     <string name="recentWords">Từ đã tìm kiếm</string>
