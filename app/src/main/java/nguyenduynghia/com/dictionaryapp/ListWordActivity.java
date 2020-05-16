@@ -117,7 +117,7 @@ public class ListWordActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Cursor cursor=database.query(wordTable,null,"word like ?",
-                        new String[]{"%"+newText+"%"},null,null,null);
+                        new String[]{newText+"%"},null,null,null);
 
                 wordAdapter.clear();
 
