@@ -9,8 +9,8 @@
     <string name="settings">Settings</string>
     <string name="definition">Definition</string>
     <string name="images">Images</string>
-    <string name="ukVoice">UK voice</string>
-    <string name="usVoice">US Voice</string>
+    <string name="ukVoice" translatable="false">UK</string>
+    <string name="usVoice" translatable="false">US</string>
     <string name="loading">Loading....</string>
     <string name="loading2">Almost doneee!</string>
 </resources>

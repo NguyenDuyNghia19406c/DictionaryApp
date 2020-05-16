@@ -42,7 +42,6 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void addMeaning() {
         txtWord.setText(tuCanTra.getWord());
-
         txtMeaning.setText(tuCanTra.getMean());
     }
 
