@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name" translatable="false">Ga Dictionary</string>
+    <string name="app_name" translatable="false">Gà Dictionary</string>
     <string name="LooksUpWords">Looks up words</string>
     <string name="yourWords">Your Words</string>
-    <string name="language">Language</string>
+    <string name="language"><u>Language</u></string>
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="recentWords">Recent words</string>
