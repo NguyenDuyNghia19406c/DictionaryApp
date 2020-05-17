@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +41,7 @@ public class YourWordsActivity extends AppCompatActivity {
     }
 
     private void AddControls() {
-        wordAdapter=new WordAdapter(YourWordsActivity.this,R.layout.item);
+        wordAdapter=new WordAdapter(YourWordsActivity.this,R.layout.item_in_list);
     }
 
     private void convertListToAdapter(List<Word> words, WordAdapter wordAdapter) {
@@ -55,8 +57,20 @@ public class YourWordsActivity extends AppCompatActivity {
                 finish();
             }
         });
+        binding.toolBarList.setTitle(getString(R.string.yourWords));
         convertListToAdapter(wordsLove,wordAdapter);
         binding.lvWordsLove.setAdapter(wordAdapter);
+        binding.lvWordsLove.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(YourWordsActivity.this,SelectedItemActivity.class);
+                Word tuCanTra = (Word) binding.lvWordsLove.getItemAtPosition(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("WORD", (Serializable) tuCanTra);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     private void lookUps() {

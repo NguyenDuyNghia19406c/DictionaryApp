@@ -85,7 +85,6 @@ public class ListWordActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(ListWordActivity.this,SelectedItemActivity.class);
-
 //                Lưu object word vào bundle cho activity
 //              hiển thị nghĩa của từ (SelectedItemActivity)
 //                Không dùng lvWord.getSelectedItem -> null
@@ -172,7 +171,7 @@ public class ListWordActivity extends AppCompatActivity {
     private void addControls() {
         tool_bar_list=findViewById(R.id.tool_bar_list);
         lvWord=findViewById(R.id.lvWord);
-        wordAdapter=new WordAdapter(ListWordActivity.this,R.layout.item);
+        wordAdapter=new WordAdapter(ListWordActivity.this,R.layout.item_in_list);
         wordAdapter.clear();
         lvWord.setAdapter(wordAdapter);
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.media.Image;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,7 +38,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         View view=this.context.getLayoutInflater().inflate(this.resource,null);
 
         final TextView txtWord=view.findViewById(R.id.txtWord);
-        final ImageView imgClose=view.findViewById(R.id.imgClose);
+//        final ImageView imgClose=view.findViewById(R.id.imgClose);
         final ImageView imgSetLove=view.findViewById(R.id.imgSetLove);
 
         final Word word=getItem(position);
@@ -47,12 +48,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
         else
             imgSetLove.setImageResource(R.drawable.ic_love);
 
-        imgClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(word);
-            }
-        });
+//        imgClose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                remove(word);
+//            }
+//        });
 
         imgSetLove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,9 @@ public class WordAdapter extends ArrayAdapter<Word> {
                 YourWordsActivity.wordsLove.add(word);
                 imgSetLove.setImageResource(R.drawable.ic_unlove);
                 updateLoveOrUnloveToDatabase(word);
+                //Thông báo cho user là đã thêm từ vào list yêu thích
+                String message = "\"" + word.getWord() + "\" " + context.getResources().getString(R.string.added);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
 
             private void xuLyUnlove() {
@@ -77,6 +81,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
                     remove(word);
                 imgSetLove.setImageResource(R.drawable.ic_love);
                 updateLoveOrUnloveToDatabase(word);
+                String message = "\"" + word.getWord() + "\" " + context.getResources().getString(R.string.deleted);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
 
             private void updateLoveOrUnloveToDatabase(Word word) {
