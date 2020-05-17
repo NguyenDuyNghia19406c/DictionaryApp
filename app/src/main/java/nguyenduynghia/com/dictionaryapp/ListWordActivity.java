@@ -51,7 +51,7 @@ public class ListWordActivity extends AppCompatActivity {
 
     }
 
-    private void loadAllWords() {
+    public void loadAllWords() {
         database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
         Cursor cursor=database.query(wordTable,null,null,null,null,null,null);
 

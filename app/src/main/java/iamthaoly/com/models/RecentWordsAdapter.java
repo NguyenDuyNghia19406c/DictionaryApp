@@ -51,7 +51,7 @@ public class RecentWordsAdapter extends ArrayAdapter<Word> {
             @Override
             public void onClick(View v) {
 
-                RecentActivity.recentWords.remove(word);
+//                RecentActivity.recentWords.remove(word);
                 ContentValues values = new ContentValues();
                 values.put("recent", 0);
                 ListWordActivity.database.update(ListWordActivity.wordTable, values, "recent=?", new String[]{word.getWord()});
