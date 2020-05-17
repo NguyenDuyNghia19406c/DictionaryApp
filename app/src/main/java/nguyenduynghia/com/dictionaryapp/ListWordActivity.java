@@ -45,7 +45,7 @@ public class ListWordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_word);
-        processCopy();
+//        processCopy();
         addControls();
         loadAllWords();
         addEvents();
@@ -92,8 +92,8 @@ public class ListWordActivity extends AppCompatActivity {
     }
 
     private void updateRecentToDatabase(Word tuCanTra) {
-//        if(RecentActivity.recentList == null) RecentActivity.recentList = new ArrayList<>();
-//        RecentActivity.recentList.add(tuCanTra);
+        if(RecentActivity.recentList == null) RecentActivity.recentList = new ArrayList<>();
+        RecentActivity.recentList.add(tuCanTra);
         ContentValues values = new ContentValues();
         values.put("recent", "true");
         ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{tuCanTra.getWord()});
@@ -223,24 +223,6 @@ public class ListWordActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-
-    private void traTu(String newText) {
-        database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
-        Cursor cursor=database.query(wordTable,null,null,null,null,null,null);
-
-        wordAdapter.clear();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String word=cursor.getString(1);
-            String mean=cursor.getString(2);
-            Word w=new Word(id, word, mean);
-            wordAdapter.add(w);
-        }
-        cursor.close();
-
     }
 
     @Override

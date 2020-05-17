@@ -31,13 +31,15 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     Button btnLookUps, btnSettings;
     public static ActivityOpen opening;
+    String DATABASE_NAME="TuDienAnhviet.sqlite";
+    String DB_PATH_SUFFIX = "/databases/";
     //SearchView search_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //processCopy();
+        processCopy();
         addControls();
         addEvents();
     }
@@ -79,6 +81,50 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void processCopy() {
+        File dbFile = getDatabasePath(DATABASE_NAME);
+        if (!dbFile.exists())
+        {
+            try
+            {
+                CopyDataBaseFromAsset();
+                Toast.makeText(this,
+                        "Copying sucess from Assets folder",
+                        Toast.LENGTH_LONG).show();
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    private String getDatabasePath() {
+        return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
+    }
+
+    public void CopyDataBaseFromAsset()
+    {
+        try {
+            InputStream myInput;
+            myInput = getAssets().open(DATABASE_NAME);
+            String outFileName = getDatabasePath();
+            File f = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
+            if (!f.exists())
+                f.mkdir();
+            OutputStream myOutput = new FileOutputStream(outFileName);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = myInput.read(buffer)) > 0) {
+                myOutput.write(buffer, 0, length);
+            }
+            myOutput.flush();
+            myOutput.close();
+            myInput.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }

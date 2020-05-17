@@ -7,18 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SearchView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import iamthaoly.com.models.RecentWordsAdapter;
 import nguyenduynghia.com.dictionaryapp.R;
 import nguyenduynghia.com.dictionaryapp.SelectedItemActivity;
 import nguyenduynghia.com.dictionaryapp.Word;
-import nguyenduynghia.com.dictionaryapp.WordAdapter;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityRecentBinding;
-import nguyenduynghia.com.dictionaryapp.databinding.ActivityYourWordsBinding;
 
 public class RecentActivity extends AppCompatActivity {
     ActivityRecentBinding binding;
@@ -42,8 +41,15 @@ public class RecentActivity extends AppCompatActivity {
     public void initRecentWords()
     {
         isInit = true;
-        recentList = new ArrayList<>();
-        loadAllWords();
+        if(recentList == null)
+        {
+            recentList = new ArrayList<>();
+            loadAllWords();
+        }
+        else
+        {
+            loadAllWords();
+        }
 
     }
     private void AddControls() {
