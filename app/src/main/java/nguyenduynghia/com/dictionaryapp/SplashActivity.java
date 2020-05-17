@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 //                    Intent intent;
 //                    intent=new Intent(SplashActivity.this, MainActivity.class);
 //                    startActivity(intent);
-//                    finish();
+//                    finish();2
 //                } catch (Exception e) {
 //
 //                }
@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
                 SplashActivity.this.startActivity(mainIntent);
                 SplashActivity.this.finish();
             }
-        }, 3000);
+        }, 2000);
     }
 
 }

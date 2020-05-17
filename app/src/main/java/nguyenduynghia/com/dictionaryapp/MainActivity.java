@@ -24,7 +24,8 @@ import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     enum ActivityOpen{
-        ListWordActivity
+        ListWordActivity,
+        YourWordsActivity
     }
     ActivityMainBinding binding;
     Button btnLookUps, btnSettings;
@@ -51,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 opening=ActivityOpen.ListWordActivity;
+                Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.btnYourWords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opening=ActivityOpen.YourWordsActivity;
                 Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
                 startActivity(intent);
             }

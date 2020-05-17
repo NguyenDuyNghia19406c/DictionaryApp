@@ -21,7 +21,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            app:srcCompat="@drawable/bird" />
+
+        <TextView
+            android:id="@+id/txtLetSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/letSearch"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textStyle="italic" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutButtons"
@@ -29,7 +49,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:gravity="center"
+        android:gravity="center|top"
         android:orientation="vertical"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
