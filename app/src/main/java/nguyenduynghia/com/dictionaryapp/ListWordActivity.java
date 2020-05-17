@@ -54,9 +54,7 @@ public class ListWordActivity extends AppCompatActivity {
     public void loadAllWords() {
         database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
         Cursor cursor=database.query(wordTable,null,null,null,null,null,null);
-
         wordAdapter.clear();
-        YourWordsActivity.wordsLove=new ArrayList<>();
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
             String word=cursor.getString(1);
@@ -64,11 +62,9 @@ public class ListWordActivity extends AppCompatActivity {
             String History="";
             if(cursor.getString(3)!=null)
                 History=cursor.getString(3);
-            boolean isLove=History.equals("Love");
+            boolean isLove= History.equals("Love");
             Word w=new Word(id, word,mean,isLove);
             wordAdapter.add(w);
-            if(isLove)
-                YourWordsActivity.wordsLove.add(w);
         }
         cursor.close();
     }
