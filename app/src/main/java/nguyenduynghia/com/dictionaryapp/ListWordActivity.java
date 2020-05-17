@@ -1,9 +1,5 @@
 package nguyenduynghia.com.dictionaryapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -17,6 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -92,8 +92,10 @@ public class ListWordActivity extends AppCompatActivity {
     }
 
     private void updateRecentToDatabase(Word tuCanTra) {
+//        if(RecentActivity.recentList == null) RecentActivity.recentList = new ArrayList<>();
+//        RecentActivity.recentList.add(tuCanTra);
         ContentValues values = new ContentValues();
-        values.put("recent", "Unlove");
+        values.put("recent", "true");
         ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{tuCanTra.getWord()});
 
     }

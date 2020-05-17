@@ -14,8 +14,6 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import iamthaoly.com.models.RecentActivity;
-
 public class WordAdapter extends ArrayAdapter<Word> {
 
 

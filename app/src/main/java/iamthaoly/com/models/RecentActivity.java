@@ -1,4 +1,4 @@
-package nguyenduynghia.com.dictionaryapp;
+package iamthaoly.com.models;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iamthaoly.com.models.RecentWordsAdapter;
+import nguyenduynghia.com.dictionaryapp.R;
+import nguyenduynghia.com.dictionaryapp.SelectedItemActivity;
+import nguyenduynghia.com.dictionaryapp.Word;
+import nguyenduynghia.com.dictionaryapp.WordAdapter;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityRecentBinding;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityYourWordsBinding;
 
@@ -24,7 +28,7 @@ public class RecentActivity extends AppCompatActivity {
     RecentWordsAdapter recentAdapter;
     String DATABASE_NAME="TuDienAnhviet.sqlite";
     String DB_PATH_SUFFIX = "/databases/";
-    public static ArrayList<Word> wordsLove;
+    public static ArrayList<Word> recentList;
     static boolean isInit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +36,18 @@ public class RecentActivity extends AppCompatActivity {
         binding=ActivityRecentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AddControls();
-//        if(isInit == false) initWordsLove();
-//        AddEvents();
+        if(!isInit) initRecentWords();
+        AddEvents();
     }
-    public void initWordsLove()
+    public void initRecentWords()
     {
         isInit = true;
-        ArrayList<Word> temp = wordsLove;
-        wordsLove = new ArrayList<>();
+        recentList = new ArrayList<>();
         loadAllWords();
 
     }
     private void AddControls() {
-        recentAdapter = new RecentWordsAdapter(RecentActivity.this,R.layout.item_in_list);
+        recentAdapter = new RecentWordsAdapter(RecentActivity.this, R.layout.item);
     }
     public void loadAllWords() {
         database = openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
@@ -54,16 +57,15 @@ public class RecentActivity extends AppCompatActivity {
             int id = cursor.getInt(0);
             String word=cursor.getString(1);
             String mean=cursor.getString(2);
-            String History="";
-            if(cursor.getString(3)!=null)
-                History=cursor.getString(3);
-            boolean isLove=History.equals("Love");
-            Word w=new Word(id, word,mean,isLove);
-            if(isLove) wordsLove.add(w);
+            String recent = "";
+            if(cursor.getString(4)!=null)
+                recent = cursor.getString(4);
+            Word w=new Word(id, word,mean);
+            if(recent.equals("true")) recentList.add(w);
         }
         cursor.close();
     }
-    private void convertListToAdapter(List<Word> words, WordAdapter wordAdapter) {
+    private void convertListToAdapter(List<Word> words, RecentWordsAdapter wordAdapter) {
         for (Word word: words) {
             wordAdapter.add(word);
         }
@@ -77,12 +79,12 @@ public class RecentActivity extends AppCompatActivity {
             }
         });
         binding.toolBarRecent.setTitle(getString(R.string.recentWords));
-//        convertListToAdapter(wordsLove,wordAdapter);
+        convertListToAdapter(recentList,recentAdapter);
         binding.lvRecent.setAdapter(recentAdapter);
         binding.lvRecent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(RecentActivity.this,SelectedItemActivity.class);
+                Intent intent=new Intent(RecentActivity.this, SelectedItemActivity.class);
                 Word tuCanTra = (Word) binding.lvRecent.getItemAtPosition(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("WORD", (Serializable) tuCanTra);

@@ -7,18 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-
-import iamthaoly.com.models.RecentActivity;
 import nguyenduynghia.com.dictionaryapp.ListWordActivity;
 import nguyenduynghia.com.dictionaryapp.R;
 import nguyenduynghia.com.dictionaryapp.Word;
-import nguyenduynghia.com.dictionaryapp.YourWordsActivity;
 
 public class RecentWordsAdapter extends ArrayAdapter<Word> {
 
@@ -42,9 +37,18 @@ public class RecentWordsAdapter extends ArrayAdapter<Word> {
             @Override
             public void onClick(View v) {
                 remove(word);
+                RecentActivity.recentList.remove(word);
+                updateRecentToDatabase(word);
             }
         });
 
         return view;
+
+    }
+    private void updateRecentToDatabase(Word tuCanTra) {
+        ContentValues values = new ContentValues();
+        values.put("recent", "false");
+        RecentActivity.database.update(RecentActivity.wordTable, values, "word=?", new String[]{tuCanTra.getWord()});
+
     }
 }
