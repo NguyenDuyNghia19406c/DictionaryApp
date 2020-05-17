@@ -32,8 +32,21 @@ public class YourWordsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         AddControls();
         if(isInit == false) initWordsLove();
+        displayEmptyImage();
         AddEvents();
     }
+
+    private void displayEmptyImage() {
+        if(wordsLove.size() == 0)
+        {
+            binding.layoutEmptyImage.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            binding.layoutEmptyImage.setVisibility(View.GONE);
+        }
+    }
+
     public void initWordsLove()
     {
         isInit = true;
