@@ -30,6 +30,8 @@ public class YourWordsActivity extends AppCompatActivity {
     SQLiteDatabase database;
     String wordTable="data";
     WordAdapter wordAdapter;
+    String DATABASE_NAME="TuDienAnhviet.sqlite";
+    String DB_PATH_SUFFIX = "/databases/";
     public static ArrayList<Word> wordsLove=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class YourWordsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         AddControls();
         AddEvents();
+
+
     }
 
     private void AddControls() {
@@ -73,62 +77,4 @@ public class YourWordsActivity extends AppCompatActivity {
         });
     }
 
-    private void lookUps() {
-        //MenuItem mnuSearch1=findViewById(R.id.mnuSearch1);
-        searchView= findViewById(R.id.mnuSearch1);
-        searchView.setIconified(false);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Cursor cursor=database.query(wordTable,null,"word like ?",
-                        new String[]{"%"+newText+"%"},null,null,null);
-
-                wordAdapter.clear();
-
-                while (cursor.moveToNext()){
-                    int id = cursor.getInt(0);
-                    String word=cursor.getString(1);
-                    String mean=cursor.getString(2);
-
-                    Word w=new Word(id, word,mean);
-                    wordAdapter.add(w);
-                }
-                cursor.close();
-                return false;
-            }
-        });
-    }
-    public void searchByVoice(MenuItem item) {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please talk!");
-
-        try {
-            startActivityForResult(intent, 113);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(), "Not supported", Toast.LENGTH_SHORT).show();
-        }
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 113 && resultCode == RESULT_OK && data != null)
-        {
-            //phan tu dau tien la dung nhat.
-            ArrayList<String> result = data
-                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            //txtSpeechInput.setText(result.get(0));
-            searchView.onActionViewExpanded();
-            searchView.setQuery(result.get(0), false);
-        }
-    }
 }

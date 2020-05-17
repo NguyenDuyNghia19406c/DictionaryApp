@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         binding.btnYourWords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opening=ActivityOpen.YourWordsActivity;
-                Intent intent=new Intent(MainActivity.this,LoadingActivity.class);
+//                opening=ActivityOpen.YourWordsActivity;
+                Intent intent=new Intent(MainActivity.this, YourWordsActivity.class);
                 startActivity(intent);
             }
         });
