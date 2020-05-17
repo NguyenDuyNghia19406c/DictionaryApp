@@ -15,5 +15,6 @@
     <string name="deleted">đã được xóa khỏi Từ Của Bạn</string>
     <string name="added">đã được thêm vào Từ Của Bạn</string>
     <string name="deleleted2">đã được xóa khỏi Từ Đã Tìm Kiếm</string>
+    <string name="empty">Trống huơ trống hoắc..</string>
 
 </resources>

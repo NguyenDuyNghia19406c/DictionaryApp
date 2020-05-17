@@ -36,6 +36,7 @@ public class RecentActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         AddControls();
         if(!isInit) initRecentWords();
+        displayEmptyImage();
         AddEvents();
     }
     public void initRecentWords()
@@ -51,6 +52,16 @@ public class RecentActivity extends AppCompatActivity {
             loadAllWords();
         }
 
+    }
+    private void displayEmptyImage() {
+        if(recentList.size() == 0)
+        {
+            binding.layoutEmptyImage.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            binding.layoutEmptyImage.setVisibility(View.GONE);
+        }
     }
     private void AddControls() {
         recentAdapter = new RecentWordsAdapter(RecentActivity.this, R.layout.item);
