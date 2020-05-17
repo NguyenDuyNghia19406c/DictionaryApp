@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SearchView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

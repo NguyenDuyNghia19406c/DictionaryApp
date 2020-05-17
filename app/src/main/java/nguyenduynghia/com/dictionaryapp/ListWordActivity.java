@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -80,6 +81,7 @@ public class ListWordActivity extends AppCompatActivity {
 //              hiển thị nghĩa của từ (SelectedItemActivity)
 //                Không dùng lvWord.getSelectedItem -> null
                 Word tuCanTra = (Word) lvWord.getItemAtPosition(position);
+                updateRecentToDatabase(tuCanTra);
 //                RecentActivity.recentWords.add(tuCanTra);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("WORD", (Serializable) tuCanTra);
@@ -87,6 +89,13 @@ public class ListWordActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void updateRecentToDatabase(Word tuCanTra) {
+        ContentValues values = new ContentValues();
+        values.put("recent", "Unlove");
+        ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{tuCanTra.getWord()});
+
     }
 
     private void createMenu() {
