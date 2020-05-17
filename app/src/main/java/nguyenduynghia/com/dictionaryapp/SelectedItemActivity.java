@@ -3,18 +3,21 @@ package nguyenduynghia.com.dictionaryapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class SelectedItemActivity extends AppCompatActivity {
@@ -24,7 +27,9 @@ public class SelectedItemActivity extends AppCompatActivity {
     Word tuCanTra;
     TextView txtWord, txtMeaning, txtIPA;
     ImageButton btnBritishSpeaker, btnAmericanSpeaker;
+    MenuItem mnuLove;
     TextToSpeech speaker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +73,23 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void addEvents() {
         tool_bar_selecteditem.inflateMenu(R.menu.menu_item);
+        tool_bar_selecteditem.setTitle(tuCanTra.getWord());
         tool_bar_selecteditem.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        Menu menu = tool_bar_selecteditem.getMenu();
+        mnuLove = menu.findItem(R.id.mnuLove);
+        if (tuCanTra.isLove())
+        {
+            mnuLove.setIcon(R.drawable.ic_unlove);
+        }
+        else
+        {
+            mnuLove.setIcon(R.drawable.ic_love);
+        }
         //Speak
         btnBritishSpeaker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,9 +105,51 @@ public class SelectedItemActivity extends AppCompatActivity {
             }
         });
 
-        tool_bar_selecteditem.setTitle(tuCanTra.getWord());
+
+        mnuLove.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(YourWordsActivity.wordsLove == null) YourWordsActivity.wordsLove = new ArrayList<>();
+                if(tuCanTra.isLove()) //Đang Love click vô sẽ thành Unlove
+                    xuLyUnlove();
+                else
+                    xuLyLove();
+                return false;
+            }
+        });
     }
 
+    private void xuLyLove() {
+        tuCanTra.setLove(true);
+        YourWordsActivity.wordsLove.add(tuCanTra);
+        mnuLove.setIcon(R.drawable.ic_unlove);
+        updateLoveOrUnloveToDatabase(tuCanTra);
+        //Thông báo cho user là đã thêm từ vào list yêu thích
+        String message = "\"" + tuCanTra.getWord() + "\" " + this.getResources().getString(R.string.added);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void xuLyUnlove() {
+        tuCanTra.setLove(false);
+        YourWordsActivity.wordsLove.remove(tuCanTra);
+        mnuLove.setIcon(R.drawable.ic_love);
+        updateLoveOrUnloveToDatabase(tuCanTra);
+        String message = "\"" + tuCanTra.getWord() + "\" " + this.getResources().getString(R.string.deleted);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    private void updateLoveOrUnloveToDatabase(Word word)
+    {
+        ContentValues values = new ContentValues();
+        if(word.isLove())
+            values.put("History", "Love");
+        else
+            values.put("History", "Unlove");
+        if(YourWordsActivity.database != null)
+            YourWordsActivity.database.update(YourWordsActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+        if(ListWordActivity.database != null)
+            ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+
+    }
     private void speak(final String voice) {
         if(speaker != null) speaker.stop();
         speaker = new TextToSpeech(SelectedItemActivity.this, new TextToSpeech.OnInitListener() {
@@ -125,6 +183,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void addControls() {
         tool_bar_selecteditem=findViewById(R.id.tool_bar_selecteditem);
+//        mnuLove = menu.findViewById(R.id.mnuLove);
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);

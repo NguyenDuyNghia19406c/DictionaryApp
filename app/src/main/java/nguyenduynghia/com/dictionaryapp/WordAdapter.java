@@ -72,8 +72,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
                 YourWordsActivity.wordsLove.remove(word);
                 String activity = context.getClass().getSimpleName();
                 if(activity.equals("YourWordsActivity")) remove(word);
-//                if(MainActivity.opening.equals(MainActivity.ActivityOpen.YourWordsActivity))
-//                    remove(word);
                 imgSetLove.setImageResource(R.drawable.ic_love);
                 updateLoveOrUnloveToDatabase(word);
                 String message = "\"" + word.getWord() + "\" " + context.getResources().getString(R.string.deleted);

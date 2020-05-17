@@ -9,7 +9,7 @@
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
     <item
-        android:id="@+id/mnuStar"
+        android:id="@+id/mnuLove"
         android:icon="@drawable/ic_love"
         android:title="Item"
         app:showAsAction="always" />
