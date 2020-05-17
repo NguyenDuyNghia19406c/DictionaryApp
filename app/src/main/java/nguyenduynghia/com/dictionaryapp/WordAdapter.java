@@ -72,6 +72,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
             private void xuLyUnlove() {
                 word.setLove(false);
                 YourWordsActivity.wordsLove.remove(word);
+                String activity = context.getClass().getSimpleName();
+                if(activity.equals("YourWordsActivity")) remove(word);
 //                if(MainActivity.opening.equals(MainActivity.ActivityOpen.YourWordsActivity))
 //                    remove(word);
                 imgSetLove.setImageResource(R.drawable.ic_love);
