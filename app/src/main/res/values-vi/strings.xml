@@ -12,7 +12,8 @@
     <string name="loading">Đang tải...</string>
     <string name="loading2">Sắp xong rùi cả nhàà</string>
     <string name="letSearch">Tìm kiếm gì đó nào..?</string>
-    <string name="deleted">đã bị xóa khỏi Từ Của Bạn</string>
+    <string name="deleted">đã được xóa khỏi Từ Của Bạn</string>
     <string name="added">đã được thêm vào Từ Của Bạn</string>
+    <string name="deleleted2">đã được xóa khỏi Từ Đã Tìm Kiếm</string>
 
 </resources>

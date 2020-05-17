@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class WordAdapter extends ArrayAdapter<Word> {
 
 
@@ -31,7 +33,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
         final TextView txtWord=view.findViewById(R.id.txtWord);
 //        final ImageView imgClose=view.findViewById(R.id.imgClose);
         final ImageView imgSetLove=view.findViewById(R.id.imgSetLove);
-
         final Word word=getItem(position);
         txtWord.setText(word.getWord());
         if(word.isLove())
@@ -49,6 +50,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         imgSetLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(YourWordsActivity.wordsLove == null) YourWordsActivity.wordsLove = new ArrayList<>();
                 if(word.isLove()) //Đang Love click vô sẽ thành Unlove
                     xuLyUnlove();
                 else
@@ -68,8 +70,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
             private void xuLyUnlove() {
                 word.setLove(false);
                 YourWordsActivity.wordsLove.remove(word);
-                if(MainActivity.opening.equals(MainActivity.ActivityOpen.YourWordsActivity))
-                    remove(word);
+                String activity = context.getClass().getSimpleName();
+                if(activity.equals("YourWordsActivity")) remove(word);
+//                if(MainActivity.opening.equals(MainActivity.ActivityOpen.YourWordsActivity))
+//                    remove(word);
                 imgSetLove.setImageResource(R.drawable.ic_love);
                 updateLoveOrUnloveToDatabase(word);
                 String message = "\"" + word.getWord() + "\" " + context.getResources().getString(R.string.deleted);
@@ -82,7 +86,16 @@ public class WordAdapter extends ArrayAdapter<Word> {
                     values.put("History", "Love");
                 else
                     values.put("History", "Unlove");
-                ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+                String activity = context.getClass().getSimpleName();
+                Toast.makeText(context, activity, Toast.LENGTH_SHORT).show();
+                if(activity.equals("YourWordsActivity"))
+                {
+                    YourWordsActivity.database.update(YourWordsActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+                }
+                else if(activity.equals("ListWordActivity"))
+                {
+                    ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{word.getWord()});
+                }
 
             }
 

@@ -1,27 +1,22 @@
 package nguyenduynghia.com.dictionaryapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.speech.RecognizerIntent;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,9 +24,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import iamthaoly.com.models.RecentActivity;
 
 public class ListWordActivity extends AppCompatActivity {
 
@@ -49,19 +45,17 @@ public class ListWordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_word);
-        processCopy();
+//        processCopy();
         addControls();
         loadAllWords();
         addEvents();
 
     }
 
-    private void loadAllWords() {
+    public void loadAllWords() {
         database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
         Cursor cursor=database.query(wordTable,null,null,null,null,null,null);
-
         wordAdapter.clear();
-        YourWordsActivity.wordsLove=new ArrayList<>();
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
             String word=cursor.getString(1);
@@ -69,11 +63,9 @@ public class ListWordActivity extends AppCompatActivity {
             String History="";
             if(cursor.getString(3)!=null)
                 History=cursor.getString(3);
-            boolean isLove=History.equals("Love");
+            boolean isLove= History.equals("Love");
             Word w=new Word(id, word,mean,isLove);
             wordAdapter.add(w);
-            if(isLove)
-                YourWordsActivity.wordsLove.add(w);
         }
         cursor.close();
     }
@@ -89,12 +81,23 @@ public class ListWordActivity extends AppCompatActivity {
 //              hiển thị nghĩa của từ (SelectedItemActivity)
 //                Không dùng lvWord.getSelectedItem -> null
                 Word tuCanTra = (Word) lvWord.getItemAtPosition(position);
+                updateRecentToDatabase(tuCanTra);
+//                RecentActivity.recentWords.add(tuCanTra);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("WORD", (Serializable) tuCanTra);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
+    }
+
+    private void updateRecentToDatabase(Word tuCanTra) {
+        if(RecentActivity.recentList == null) RecentActivity.recentList = new ArrayList<>();
+        RecentActivity.recentList.add(tuCanTra);
+        ContentValues values = new ContentValues();
+        values.put("recent", "true");
+        ListWordActivity.database.update(ListWordActivity.wordTable, values, "word=?", new String[]{tuCanTra.getWord()});
+
     }
 
     private void createMenu() {
@@ -220,24 +223,6 @@ public class ListWordActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-
-    private void traTu(String newText) {
-        database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
-        Cursor cursor=database.query(wordTable,null,null,null,null,null,null);
-
-        wordAdapter.clear();
-
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String word=cursor.getString(1);
-            String mean=cursor.getString(2);
-            Word w=new Word(id, word, mean);
-            wordAdapter.add(w);
-        }
-        cursor.close();
-
     }
 
     @Override
