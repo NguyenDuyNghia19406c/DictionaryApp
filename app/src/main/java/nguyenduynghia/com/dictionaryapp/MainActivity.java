@@ -1,15 +1,12 @@
 package nguyenduynghia.com.dictionaryapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -89,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             try
             {
                 CopyDataBaseFromAsset();
-                Toast.makeText(this,
-                        "Copying sucess from Assets folder",
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(this,
+//                        "Copying sucess from Assets folder",
+//                        Toast.LENGTH_LONG).show();
             }
             catch (Exception e)
             {

@@ -22,7 +22,7 @@ public class SelectedItemActivity extends AppCompatActivity {
     Toolbar tool_bar_selecteditem;
     TabHost tabHost;
     Word tuCanTra;
-    TextView txtWord, txtMeaning;
+    TextView txtWord, txtMeaning, txtIPA;
     ImageButton btnBritishSpeaker, btnAmericanSpeaker;
     TextToSpeech speaker;
     @Override
@@ -42,6 +42,27 @@ public class SelectedItemActivity extends AppCompatActivity {
 
     private void addMeaning() {
         txtWord.setText(tuCanTra.getWord());
+
+        //trim unnecessary word.
+        String mean = tuCanTra.getMean();
+        mean = mean.replace("@", "");
+        mean = mean.replaceFirst(tuCanTra.getWord(), "");
+        //get IPA
+        int ipaBegin = mean.indexOf("/");
+        int ipaEnd = mean.indexOf("/", ipaBegin + 1);
+        if(ipaBegin == -1 || ipaEnd == -1)
+        {
+            txtIPA.setVisibility(View.GONE);
+        }
+        else
+        {
+            txtIPA.setVisibility(View.VISIBLE);
+            String IPA = mean.substring(ipaBegin, ipaEnd + 1);
+            mean = mean.replace(IPA, "");
+            txtIPA.setText(IPA);
+        }
+        mean = mean.trim();
+        tuCanTra.setMean(mean);
         txtMeaning.setText(tuCanTra.getMean());
     }
 
@@ -107,7 +128,7 @@ public class SelectedItemActivity extends AppCompatActivity {
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);
-//        txtMeaning.setMovementMethod(new ScrollingMovementMethod());
+        txtIPA = findViewById(R.id.txtIPA);
 
         btnBritishSpeaker = findViewById(R.id.btnBritishSpeaker);
         btnAmericanSpeaker = findViewById(R.id.btnAmericanSpeaker);
