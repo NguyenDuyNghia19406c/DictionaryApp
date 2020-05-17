@@ -16,4 +16,5 @@
     <string name="letSearch">Let\'s search something..?</string>
     <string name="deleted">is removed from Your Words</string>
     <string name="added">is added to Your Word</string>
+    <string name="deleleted2">is removed from Recent Words</string>
 </resources>

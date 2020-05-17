@@ -1,25 +1,17 @@
 package nguyenduynghia.com.dictionaryapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SearchView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityYourWordsBinding;
 
@@ -40,7 +32,6 @@ public class YourWordsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         AddControls();
         AddEvents();
-
 
     }
 

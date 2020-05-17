@@ -1,4 +1,4 @@
-package nguyenduynghia.com.dictionaryapp;
+package iamthaoly.com.models;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -12,24 +12,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class WordAdapter extends ArrayAdapter<Word> {
+import java.util.ArrayList;
 
+import nguyenduynghia.com.dictionaryapp.ListWordActivity;
+import nguyenduynghia.com.dictionaryapp.MainActivity;
+import nguyenduynghia.com.dictionaryapp.R;
+import nguyenduynghia.com.dictionaryapp.Word;
+import nguyenduynghia.com.dictionaryapp.YourWordsActivity;
+
+public class RecentWordsAdapter extends ArrayAdapter<Word> {
 
     Activity context;
     int resource;
-    public WordAdapter(@NonNull Activity context, int resource) {
+    public RecentWordsAdapter(@NonNull Activity context, int resource) {
         super(context, resource);
         this.context=context;
-        this.resource=resource;        
+        this.resource=resource;
     }
-   
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view=this.context.getLayoutInflater().inflate(this.resource,null);
 
         final TextView txtWord=view.findViewById(R.id.txtWord);
-//        final ImageView imgClose=view.findViewById(R.id.imgClose);
+        final ImageView imgClose=view.findViewById(R.id.imgClose);
         final ImageView imgSetLove=view.findViewById(R.id.imgSetLove);
         final Word word=getItem(position);
         txtWord.setText(word.getWord());
@@ -38,13 +45,20 @@ public class WordAdapter extends ArrayAdapter<Word> {
         else
             imgSetLove.setImageResource(R.drawable.ic_love);
 
-//        imgClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                remove(word);
-//            }
-//        });
+        txtWord.setText(word.getWord());
 
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                RecentActivity.recentWords.remove(word);
+                ContentValues values = new ContentValues();
+                values.put("recent", 0);
+                ListWordActivity.database.update(ListWordActivity.wordTable, values, "recent=?", new String[]{word.getWord()});
+                String message = "\"" + word.getWord() + "\" " + context.getResources().getString(R.string.deleleted2);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
         imgSetLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

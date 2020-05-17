@@ -17,13 +17,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import iamthaoly.com.models.RecentActivity;
 import iamthaoly.com.models.Setting;
 import nguyenduynghia.com.dictionaryapp.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    enum ActivityOpen{
+    public enum ActivityOpen{
         ListWordActivity,
         YourWordsActivity
     }
@@ -68,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
+            }
+        });
+        binding.btnRecent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecentActivity.class);
                 startActivity(intent);
             }
         });
