@@ -5,20 +5,27 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SelectedItemActivity extends AppCompatActivity {
 
@@ -29,7 +36,7 @@ public class SelectedItemActivity extends AppCompatActivity {
     ImageButton btnBritishSpeaker, btnAmericanSpeaker;
     MenuItem mnuLove;
     TextToSpeech speaker;
-
+    SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +81,8 @@ public class SelectedItemActivity extends AppCompatActivity {
     private void addEvents() {
         tool_bar_selecteditem.inflateMenu(R.menu.menu_item);
         tool_bar_selecteditem.setTitle(tuCanTra.getWord());
+        searchView = findViewById(R.id.mnuSearch2);
+//        searchView.setIconified(false);
         tool_bar_selecteditem.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +126,37 @@ public class SelectedItemActivity extends AppCompatActivity {
                 return false;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                highlight(newText);
+                return false;
+            }
+        });
+    }
+
+    private void highlight(String text)
+    {
+        SpannableString spannableString = new SpannableString(txtMeaning.getText());
+        //remove old highlighted word
+        BackgroundColorSpan[] oldSpan =
+                spannableString.getSpans(0, spannableString.length(), BackgroundColorSpan.class);
+        for (BackgroundColorSpan bgSpan : oldSpan)
+            spannableString.removeSpan(bgSpan);
+        //highlight new word
+        Pattern pattern = Pattern.compile(text, Pattern.CASE_INSENSITIVE);
+        Matcher m = pattern.matcher(txtMeaning.getText());
+        while(m.find())
+        {
+            spannableString.setSpan(new BackgroundColorSpan(Color.YELLOW),
+                    m.start(), m.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        txtMeaning.setText(spannableString);
     }
 
     private void xuLyLove() {
@@ -184,6 +224,7 @@ public class SelectedItemActivity extends AppCompatActivity {
     private void addControls() {
         tool_bar_selecteditem=findViewById(R.id.tool_bar_selecteditem);
 //        mnuLove = menu.findViewById(R.id.mnuLove);
+
 
         txtWord = findViewById(R.id.txtWord);
         txtMeaning = findViewById(R.id.txtMeaning);
