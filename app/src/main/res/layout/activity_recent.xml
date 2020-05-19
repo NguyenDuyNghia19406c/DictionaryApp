@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     android:orientation="vertical"
     tools:context="iamthaoly.com.models.RecentActivity">
 
@@ -20,6 +21,7 @@
         android:id="@+id/layoutEmptyImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/bgColor"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"

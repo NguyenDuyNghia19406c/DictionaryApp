@@ -1,6 +1,7 @@
 package nguyenduynghia.com.dictionaryapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
@@ -40,6 +41,7 @@ public class SelectedItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         setContentView(R.layout.activity_selected_item);
 
         Intent intent = getIntent();
@@ -51,7 +53,13 @@ public class SelectedItemActivity extends AppCompatActivity {
 //        Lấy từ người dùng chọn bên ListWordActivity
         addMeaning();
     }
-
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
+    }
     private void addMeaning() {
         txtWord.setText(tuCanTra.getWord());
 

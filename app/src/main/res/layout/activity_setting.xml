@@ -4,51 +4,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="5dp"
+    android:background="?attr/bgColor"
     android:orientation="vertical"
     tools:context="iamthaoly.com.models.Setting">
 
     <LinearLayout
-        android:id="@+id/layoutChooseLanguages"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtChooseLanguage"
+        <LinearLayout
+            android:id="@+id/layoutChooseLanguages"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/language"
-            android:textAllCaps="true"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <RadioGroup
-            android:id="@+id/languages"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtChooseLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/language"
+                android:textAllCaps="true"
+                android:textColor="?attr/metaTextColor"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/languages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/radEnglish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/english"
+                    android:textColor="?attr/metaTextColor"
+                    android:textSize="18dp" />
+
+                <RadioButton
+                    android:id="@+id/radVietnamese"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vietnamese"
+                    android:textColor="?attr/metaTextColor"
+                    android:textSize="18dp" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="1">
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
 
-            <RadioButton
-                android:id="@+id/radEnglish"
+        <LinearLayout
+            android:id="@+id/layoutDarkTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDarkTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/english"
-                android:textSize="18sp" />
+                android:text="@string/darkMode"
+                android:textAllCaps="true"
+                android:textColor="?attr/metaTextColor"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/radVietnamese"
+            <RadioGroup
+                android:id="@+id/darkMode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/vietnamese"
-                android:textSize="18sp" />
-        </RadioGroup>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp">
+
+                <RadioButton
+                    android:id="@+id/radDarkOn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/On"
+                    android:textColor="?attr/metaTextColor"
+                    android:textSize="18dp" />
+
+                <RadioButton
+                    android:id="@+id/radDarkOff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Off"
+                    android:textColor="?attr/metaTextColor"
+                    android:textSize="18dp" />
+            </RadioGroup>
+        </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

@@ -2,9 +2,7 @@
 <resources>
     <string name="LooksUpWords">Tra từ</string>
     <string name="yourWords">Từ của bạn</string>
-    <string name="language"><u>Ngôn ngữ</u></string>
-    <string name="english">Tiếng Anh</string>
-    <string name="vietnamese">Tiếng Việt</string>
+    <string name="language">Ngôn ngữ</string>
     <string name="recentWords">Từ đã tìm kiếm</string>
     <string name="settings">Cài đặt</string>
     <string name="definition">Định nghĩa</string>
@@ -16,5 +14,8 @@
     <string name="added">đã được thêm vào Từ Của Bạn</string>
     <string name="deleleted2">đã được xóa khỏi Từ Đã Tìm Kiếm</string>
     <string name="empty">Trống huơ trống hoắc..</string>
+    <string name="darkMode">Chế độ ban đêm</string>
+    <string name="On">"Bật "</string>
+    <string name="Off">Tắt</string>
 
 </resources>

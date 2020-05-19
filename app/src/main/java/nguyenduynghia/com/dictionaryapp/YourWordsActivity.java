@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class YourWordsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         binding=ActivityYourWordsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AddControls();
@@ -35,7 +38,13 @@ public class YourWordsActivity extends AppCompatActivity {
         displayEmptyImage();
         AddEvents();
     }
-
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
+    }
     private void displayEmptyImage() {
         if(wordsLove.size() == 0)
         {

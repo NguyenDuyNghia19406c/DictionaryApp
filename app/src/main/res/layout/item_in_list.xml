@@ -12,7 +12,7 @@
         android:layout_marginVertical="5dp"
         android:gravity="left"
         android:text="TextView"
-
+        android:textColor="?attr/metaTextColor"
         android:textSize="18sp" />
 
     <GridLayout

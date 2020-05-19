@@ -15,6 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/bgColor"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
@@ -40,6 +41,7 @@
                     android:id="@+id/tab1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="?attr/metaTextColor"
                     android:orientation="vertical">
                     <include layout="@layout/word_definition"/>
                 </LinearLayout>
@@ -56,6 +58,7 @@
                     android:id="@+id/tab3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="?attr/metaTextColor"
                     android:orientation="vertical">
 
                 </LinearLayout>

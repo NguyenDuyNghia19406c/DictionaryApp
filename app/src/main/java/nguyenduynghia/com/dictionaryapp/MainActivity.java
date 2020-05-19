@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,19 +35,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         processCopy();
         addControls();
         addEvents();
     }
+
     private void addControls() {
         btnLookUps=findViewById(R.id.btnLookUps);
         //search_view=findViewById(R.id.search_view);
         //wordAdapter=new WordAdapter(MainActivity.this,R.layout.item);
         btnSettings = findViewById(R.id.btnSettings);
     }
-
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
+    }
     private void addEvents() {
         btnLookUps.setOnClickListener(new View.OnClickListener() {
             @Override

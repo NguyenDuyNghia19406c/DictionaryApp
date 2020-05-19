@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,12 +33,20 @@ public class RecentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         binding=ActivityRecentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AddControls();
         if(!isInit) initRecentWords();
         displayEmptyImage();
         AddEvents();
+    }
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
     }
     public void initRecentWords()
     {

@@ -20,6 +20,7 @@
                 android:id="@+id/txtWord"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/metaTextColor"
                 android:text="Từ cần tra"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -35,6 +36,7 @@
                     android:id="@+id/txtIPA"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:textColor="?attr/metaTextColor"
                     android:layout_weight="1"
                     android:text="IPA"
                     android:textSize="18sp" />
@@ -49,6 +51,7 @@
                         android:id="@+id/britishVoice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="?attr/metaTextColor"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:text="@string/ukVoice"
@@ -58,8 +61,8 @@
                         android:id="@+id/btnBritishSpeaker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="?attr/bgColor"
                         android:layout_weight="1"
-                        android:background="#FFFFFF"
                         app:srcCompat="@drawable/baseline_headset_24" />
                 </LinearLayout>
 
@@ -73,6 +76,7 @@
                         android:id="@+id/americanVoice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="?attr/metaTextColor"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:text="@string/usVoice"
@@ -83,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#FFFFFF"
+                        android:background="?attr/bgColor"
                         app:srcCompat="@drawable/baseline_headset_24" />
                 </LinearLayout>
             </LinearLayout>
@@ -91,6 +95,7 @@
                 android:id="@+id/txtMeaning"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="?attr/metaTextColor"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="Nghĩa của từ"

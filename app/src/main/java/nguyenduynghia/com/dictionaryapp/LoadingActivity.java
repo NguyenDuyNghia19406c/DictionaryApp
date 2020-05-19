@@ -1,6 +1,7 @@
 package nguyenduynghia.com.dictionaryapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         binding=ActivityLoadingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Thread welcomeThread = new Thread() {
@@ -43,5 +45,12 @@ public class LoadingActivity extends AppCompatActivity {
             }
         };
         welcomeThread.start();
+    }
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
     }
 }

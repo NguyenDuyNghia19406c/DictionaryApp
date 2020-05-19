@@ -13,7 +13,7 @@
         android:gravity="left"
         android:scrollHorizontally="false"
         android:text="TextView"
-
+        android:textColor="?attr/metaTextColor"
         android:textSize="18sp" />
 
     <ImageView

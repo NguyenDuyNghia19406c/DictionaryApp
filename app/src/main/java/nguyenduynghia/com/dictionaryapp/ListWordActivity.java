@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class ListWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setThemeForActivity();
         setContentView(R.layout.activity_list_word);
 //        processCopy();
         addControls();
@@ -51,7 +53,13 @@ public class ListWordActivity extends AppCompatActivity {
         addEvents();
 
     }
-
+    private void setThemeForActivity() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.LightTheme);
+        }
+    }
     public void loadAllWords() {
         database=openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
         Cursor cursor=database.query(wordTable,null,null,null,null,null,null);

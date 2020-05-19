@@ -5,6 +5,7 @@
     android:id="@+id/searchView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/letSearch"
+            android:textColor="?attr/metaTextColor"
             android:textAlignment="center"
             android:textSize="18dp"
             android:textStyle="italic" />

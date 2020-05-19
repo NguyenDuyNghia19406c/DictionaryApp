@@ -19,12 +19,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/bgColor"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?attr/metaTextColor"
             android:gravity="center"
             android:text="@string/loading"
             android:textSize="40dp" />
@@ -33,6 +35,7 @@
             android:id="@+id/txtNameActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?attr/metaTextColor"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/loading2"
