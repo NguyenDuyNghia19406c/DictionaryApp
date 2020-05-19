@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -54,11 +55,10 @@ public class SelectedItemActivity extends AppCompatActivity {
         addMeaning();
     }
     private void setThemeForActivity() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.LightTheme);
-        }
+        SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
+        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        if(theme_boolean) setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
     }
     private void addMeaning() {
         txtWord.setText(tuCanTra.getWord());

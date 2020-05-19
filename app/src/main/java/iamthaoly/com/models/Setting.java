@@ -2,6 +2,7 @@ package iamthaoly.com.models;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.RadioButton;
@@ -25,6 +26,8 @@ public class Setting extends BaseActivity {
     RadioGroup radioGroup, darkModeGroup;
     RadioButton radEnglish, radVietnamese;
     RadioButton radDarkOn, radDarkOff;
+    SharedPreferences settingPreferences;
+    boolean theme_boolean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +40,10 @@ public class Setting extends BaseActivity {
         addEvents();
     }
     private void setThemeForActivity() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.LightTheme);
-        }
+        settingPreferences = getSharedPreferences("THEME", 0);
+        theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        if(theme_boolean) setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
     }
 
     private void addEvents() {
@@ -66,16 +68,26 @@ public class Setting extends BaseActivity {
                 switch(checkedId) {
                     case R.id.radDarkOn:
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        savePreference(true);
                         restart();
                         break;
                     case R.id.radDarkOff:
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        savePreference(false);
                         restart();
                         break;
                 }
             }
         });
     }
+
+    private void savePreference(boolean state) {
+        SharedPreferences settingPreference = getSharedPreferences("THEME", 0);
+        SharedPreferences.Editor mEditor = settingPreference.edit();
+        mEditor.putBoolean("theme_boolean", state).commit();
+    }
+
+
     private void addControls() {
         radioGroup = findViewById(R.id.languages);
         radEnglish = findViewById(R.id.radEnglish);
@@ -87,7 +99,7 @@ public class Setting extends BaseActivity {
         darkModeGroup = findViewById(R.id.darkMode);
         radDarkOn = findViewById(R.id.radDarkOn);
         radDarkOff = findViewById(R.id.radDarkOff);
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+        if(theme_boolean)
             darkModeGroup.check(R.id.radDarkOn);
         else
             darkModeGroup.check(R.id.radDarkOff);

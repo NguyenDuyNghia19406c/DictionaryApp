@@ -1,6 +1,7 @@
 package nguyenduynghia.com.dictionaryapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -39,11 +40,10 @@ public class YourWordsActivity extends AppCompatActivity {
         AddEvents();
     }
     private void setThemeForActivity() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.LightTheme);
-        }
+        SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
+        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        if(theme_boolean) setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
     }
     private void displayEmptyImage() {
         if(wordsLove.size() == 0)

@@ -1,6 +1,7 @@
 package nguyenduynghia.com.dictionaryapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = findViewById(R.id.btnSettings);
     }
     private void setThemeForActivity() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme);
-        } else {
-            setTheme(R.style.LightTheme);
-        }
+        SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
+        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        if(theme_boolean) setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
     }
     private void addEvents() {
         btnLookUps.setOnClickListener(new View.OnClickListener() {
