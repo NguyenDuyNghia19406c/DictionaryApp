@@ -49,7 +49,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
     private void setThemeForActivity() {
         SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
-        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", false);
         if(theme_boolean) setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
     }

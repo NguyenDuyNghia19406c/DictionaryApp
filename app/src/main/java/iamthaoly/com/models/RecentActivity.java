@@ -51,7 +51,7 @@ public class RecentActivity extends AppCompatActivity {
     }
     private void setThemeForActivity() {
         settingPreferences = getSharedPreferences("THEME", 0);
-        theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        theme_boolean = settingPreferences.getBoolean("theme_boolean", false);
         if(theme_boolean) setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
     }
