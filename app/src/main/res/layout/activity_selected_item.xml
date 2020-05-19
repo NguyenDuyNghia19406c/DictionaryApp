@@ -41,7 +41,6 @@
                     android:id="@+id/tab1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="?attr/metaTextColor"
                     android:orientation="vertical">
                     <include layout="@layout/word_definition"/>
                 </LinearLayout>

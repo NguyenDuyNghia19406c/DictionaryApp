@@ -3,8 +3,11 @@ package iamthaoly.com.models;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -28,6 +31,7 @@ public class Setting extends BaseActivity {
     RadioButton radDarkOn, radDarkOff;
     SharedPreferences settingPreferences;
     boolean theme_boolean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +40,17 @@ public class Setting extends BaseActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.settings));
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent)));
         addControls();
         addEvents();
     }
     private void setThemeForActivity() {
         settingPreferences = getSharedPreferences("THEME", 0);
         theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
-        if(theme_boolean) setTheme(R.style.DarkTheme);
+        if(theme_boolean)
+        {
+            setTheme(R.style.DarkTheme);
+        }
         else setTheme(R.style.LightTheme);
     }
 
@@ -89,6 +97,7 @@ public class Setting extends BaseActivity {
 
 
     private void addControls() {
+
         radioGroup = findViewById(R.id.languages);
         radEnglish = findViewById(R.id.radEnglish);
         radVietnamese = findViewById(R.id.radVietnamese);
@@ -100,9 +109,14 @@ public class Setting extends BaseActivity {
         radDarkOn = findViewById(R.id.radDarkOn);
         radDarkOff = findViewById(R.id.radDarkOff);
         if(theme_boolean)
+        {
             darkModeGroup.check(R.id.radDarkOn);
+        }
         else
+        {
             darkModeGroup.check(R.id.radDarkOff);
+        }
+
     }
 
     private void followSystemLocale() {

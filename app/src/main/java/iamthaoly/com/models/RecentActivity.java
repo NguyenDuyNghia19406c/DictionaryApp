@@ -5,8 +5,12 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +35,9 @@ public class RecentActivity extends AppCompatActivity {
     String DB_PATH_SUFFIX = "/databases/";
     public static ArrayList<Word> recentList;
     static boolean isInit = false;
+    SharedPreferences settingPreferences;
+    boolean theme_boolean;
+    MenuItem mnuClearAll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +50,8 @@ public class RecentActivity extends AppCompatActivity {
         AddEvents();
     }
     private void setThemeForActivity() {
-        SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
-        boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
+        settingPreferences = getSharedPreferences("THEME", 0);
+        theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
         if(theme_boolean) setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
     }
@@ -66,6 +73,7 @@ public class RecentActivity extends AppCompatActivity {
         if(recentList.size() == 0)
         {
             binding.layoutEmptyImage.setVisibility(View.VISIBLE);
+
         }
         else
         {
@@ -105,6 +113,9 @@ public class RecentActivity extends AppCompatActivity {
             }
         });
         binding.toolBarRecent.setTitle(getString(R.string.recentWords));
+        binding.toolBarRecent.inflateMenu(R.menu.menu_recent);
+        Menu menu = binding.toolBarRecent.getMenu();
+        mnuClearAll = menu.findItem(R.id.mnuClearAll);
         convertListToAdapter(recentList,recentAdapter);
         binding.lvRecent.setAdapter(recentAdapter);
         binding.lvRecent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,6 +127,13 @@ public class RecentActivity extends AppCompatActivity {
                 bundle.putSerializable("WORD", (Serializable) tuCanTra);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+        });
+        mnuClearAll.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(recentList.size() > 0) recentAdapter.clearAll();
+                return false;
             }
         });
     }

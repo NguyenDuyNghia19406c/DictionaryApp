@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
     private void setThemeForActivity() {
         SharedPreferences settingPreferences = getSharedPreferences("THEME", 0);
         boolean theme_boolean = settingPreferences.getBoolean("theme_boolean", true);
-        if(theme_boolean) setTheme(R.style.DarkTheme);
+        if(theme_boolean)
+        {
+            setTheme(R.style.DarkTheme);
+        }
         else setTheme(R.style.LightTheme);
     }
     private void addEvents() {
